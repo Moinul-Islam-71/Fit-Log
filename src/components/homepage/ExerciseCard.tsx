@@ -70,6 +70,7 @@ const ExerciseCard = ({ exercise }: ExerciseProps) => {
         <div className="flex items-center gap-1.5">
           <Flame className="w-4 h-4 text-gray-400" />
           <span>{caloriesBurned} kcal</span>
+          
         </div>
 
         <div className="flex items-center gap-1.5">
