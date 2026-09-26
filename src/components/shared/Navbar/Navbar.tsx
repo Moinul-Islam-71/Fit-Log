@@ -47,7 +47,7 @@ const Navbar = () => {
       <div className="navbar-end flex items-center gap-6">
         
         <div className="flex items-center gap-2 text-sm font-medium text-gray-300">
-          <span>Plan</span>
+          <span className='font-inter'>Plan</span>
           <span className="bg-[#a3e635] text-black font-bold px-2 py-0.5 rounded-full text-xs min-w-5 text-center">
             0
           </span>
@@ -55,7 +55,7 @@ const Navbar = () => {
 
         
         <div className="flex items-center gap-2 text-sm font-medium text-gray-300">
-          <span>Saved</span>
+          <span className='font-inter'>Saved</span>
           <span className="border border-gray-600 text-gray-300 font-bold px-2 py-0.5 rounded-full text-xs min-w-5 text-center">
             0
           </span>

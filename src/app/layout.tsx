@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { oswald, inter, playfair, workSans } from '@/app/fonts';
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar/Navbar";
 
@@ -22,14 +23,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable} ${playfair.variable} ${workSans.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
       
         <Navbar />
 
         {children}
-        
+
       </body>
     </html>
   );
