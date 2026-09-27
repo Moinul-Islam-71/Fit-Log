@@ -3,6 +3,8 @@ import Banner from '@/components/homepage/Banner';
 import Library from '@/components/homepage/Library';
 
 
+export const dynamic = 'force-dynamic';
+
 function LibrarySkeleton() {
   return (
     <section className="py-8 px-4 md:px-8 max-w-7xl mx-auto">
@@ -33,17 +35,14 @@ function LibrarySkeleton() {
   );
 }
 
-const page = () => {
+export default function HomePage() {
   return (
     <div>
       <Banner />
-
 
       <Suspense fallback={<LibrarySkeleton />}>
         <Library />
       </Suspense>
     </div>
   );
-};
-
-export default page;
+}
