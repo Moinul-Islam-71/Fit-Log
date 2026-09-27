@@ -30,8 +30,8 @@ const ExerciseProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const loadFromLocalStorage = async () => {
             try {
-                await delay(2000);
-                
+                await delay(500);
+
                 const storedPlan = localStorage.getItem('fitlog-plan');
                 const storedSavedPlan = localStorage.getItem('fitlog-savedPlan');
 

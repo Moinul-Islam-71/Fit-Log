@@ -33,7 +33,9 @@ export default function SelectedExerciseCard({
         if (isDone) return;
 
         setIsDone(true);
-        toast.success(`${exercise.name} marked as done!`);
+        setPlan(plan.filter(item => item.id !== exercise.id));
+        toast.success(`${exercise.name} workout logged. Nice done`);
+        
     };
 
     return (

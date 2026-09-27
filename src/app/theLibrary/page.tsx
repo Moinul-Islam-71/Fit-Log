@@ -2,8 +2,13 @@ import ExerciseCard from '@/components/homepage/ExerciseCard';
 import { Exercise } from '@/types/exercises.type';
 import Link from 'next/link'
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const getExercises = async (): Promise<Exercise[]> => {
   try {
+    
+    await delay(500); 
+
     const res = await fetch('https://api.api-store.workers.dev/api/fitlog', {
       cache: 'no-store', 
     });

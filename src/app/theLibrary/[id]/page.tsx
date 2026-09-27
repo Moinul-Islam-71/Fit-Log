@@ -7,7 +7,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getExercise = async (id: string): Promise<Exercise> => {
   try {
-    await delay(1000);
+    await delay(500);
 
     const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`, {
       // next: {
