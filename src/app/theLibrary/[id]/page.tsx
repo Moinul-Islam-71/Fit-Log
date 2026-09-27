@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { Calendar, Bookmark } from 'lucide-react';
 import { Exercise } from '@/types/exercises.type';
+import AddToPlanButton from '@/components/Buttons/AddToPlanButton';
+import SaveForLaterButton from '@/components/Buttons/SaveForLaterButton';
 
 const getExercise = async (id: string): Promise<Exercise> => {
   try {
@@ -134,14 +135,10 @@ export default async function ExerciseDetailsPage({ params }: ExerciseDetailsPro
 
            
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <button className="flex-1 bg-[#a3e635] hover:bg-[#8ee011] text-black font-extrabold py-3.5 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center gap-2 text-sm uppercase">
-              <Calendar className="w-4 h-4 text-black stroke-[2.5]" />
-              {"Add to today's plan"}
-            </button>
-            <button className="bg-transparent hover:bg-gray-800/50 border border-gray-800 text-white font-extrabold py-3.5 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center gap-2 text-sm uppercase">
-              <Bookmark className="w-4 h-4 text-white stroke-[2.5]" />
-              Save for later
-            </button>
+            
+            <AddToPlanButton exercise={exercise}/>
+
+            <SaveForLaterButton exercise={exercise}/>
           </div>
         </div>
 

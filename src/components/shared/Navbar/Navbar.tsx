@@ -2,11 +2,13 @@ import Link from 'next/link';
 import NavLink from '@/components/shared/Navbar/NavLink';
 import Image from 'next/image';
 import logo from '@/assets/logo.png'
+import PlanNavButton from './PlanNavButton';
+import SavedNavButton from './SavedNavButton';
 
 const links = (
   <>
-    <li><NavLink href="/workouts">Workouts</NavLink></li>
-    <li><NavLink href="/my-plan">My Plan</NavLink></li>
+    <li><NavLink href="/">Workouts</NavLink></li>
+    <li><NavLink href="/myPlan">My Plan</NavLink></li>
   </>
 );
 
@@ -46,20 +48,10 @@ const Navbar = () => {
       
       <div className="navbar-end flex items-center gap-6">
         
-        <div className="flex items-center gap-2 text-sm font-medium text-gray-300">
-          <span className='font-inter'>Plan</span>
-          <span className="bg-[#a3e635] text-black font-bold px-2 py-0.5 rounded-full text-xs min-w-5 text-center">
-            0
-          </span>
-        </div>
+        <PlanNavButton />
 
+        <SavedNavButton />
         
-        <div className="flex items-center gap-2 text-sm font-medium text-gray-300">
-          <span className='font-inter'>Saved</span>
-          <span className="border border-gray-600 text-gray-300 font-bold px-2 py-0.5 rounded-full text-xs min-w-5 text-center">
-            0
-          </span>
-        </div>
       </div>
     </div>
   );
