@@ -4,12 +4,19 @@ import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useExercise } from '@/context/ExerciseContext';
 import SelectedExerciseCard from '@/components/myPlanPage/SelectedExerciseCard';
+import { useSearchParams } from 'next/navigation';
 
 export default function WorkoutDashboard() {
-  const [activeTab, setActiveTab] = useState<'today' | 'saved'>('saved');
   const [sortBy, setSortBy] = useState<string>('Duration');
-
   const { plan, savedPlan } = useExercise();
+
+  const searchParams = useSearchParams();
+
+  const tab = searchParams.get('tab');
+
+  const [activeTab, setActiveTab] = useState<'today' | 'saved'>(
+    tab === 'today' ? 'today' : 'saved'
+  );
 
 
   const exercises = activeTab === 'today' ? plan : savedPlan;
@@ -83,8 +90,8 @@ export default function WorkoutDashboard() {
             <button
               onClick={() => setActiveTab('today')}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'today'
-                  ? 'bg-[#222630] text-white shadow'
-                  : 'text-gray-400 hover:text-white'
+                ? 'bg-[#222630] text-white shadow'
+                : 'text-gray-400 hover:text-white'
                 }`}
             >
               {`Today's Plan`}
@@ -93,8 +100,8 @@ export default function WorkoutDashboard() {
             <button
               onClick={() => setActiveTab('saved')}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'saved'
-                  ? 'bg-[#222630] text-white shadow'
-                  : 'text-gray-400 hover:text-white'
+                ? 'bg-[#222630] text-white shadow'
+                : 'text-gray-400 hover:text-white'
                 }`}
             >
               Saved
