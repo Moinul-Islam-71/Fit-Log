@@ -8,7 +8,7 @@ import SavedNavButton from './SavedNavButton';
 const links = (
   <>
     <li><NavLink href="/">Workouts</NavLink></li>
-    <li><NavLink href="/myPlan?tab=today">My Plan</NavLink></li>
+    <li><NavLink href="/myPlan">My Plan</NavLink></li>
   </>
 );
 

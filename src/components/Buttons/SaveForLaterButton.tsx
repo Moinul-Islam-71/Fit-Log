@@ -3,6 +3,7 @@
 import { Bookmark } from 'lucide-react';
 import { useExercise } from '@/context/ExerciseContext';
 import { Exercise } from '@/types/exercises.type';
+import { toast } from 'react-toastify';
 
 type SaveForLaterButtonProps = {
     exercise: Exercise;
@@ -23,10 +24,14 @@ const SaveForLaterButton = ({ exercise }: SaveForLaterButtonProps) => {
         );
 
         if (alreadyAddedInPlan || alreadySavedForLater) {
+            toast.info('This exercise is already added!');
             return;
         }
 
-        setSavedPlan([...savedPlan, exercise,]);
+
+        setSavedPlan([...savedPlan, exercise]);
+
+        toast.success(`${exercise.name} saved for later!`);
     };
 
     return (
@@ -41,3 +46,4 @@ const SaveForLaterButton = ({ exercise }: SaveForLaterButtonProps) => {
 };
 
 export default SaveForLaterButton;
+

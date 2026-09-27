@@ -3,12 +3,16 @@ import { Exercise } from '@/types/exercises.type';
 import AddToPlanButton from '@/components/Buttons/AddToPlanButton';
 import SaveForLaterButton from '@/components/Buttons/SaveForLaterButton';
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const getExercise = async (id: string): Promise<Exercise> => {
   try {
+    await delay(1000);
+
     const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`, {
-      next: {
-        revalidate: 30,
-      },
+      // next: {
+      //   revalidate: 30,
+      // },
     });
 
     if (!res.ok) {

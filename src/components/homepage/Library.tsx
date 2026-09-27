@@ -2,12 +2,17 @@ import ExerciseCard from '@/components/homepage/ExerciseCard';
 import { Exercise } from '@/types/exercises.type';
 import Link from 'next/link'
 
+const delay = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 const getExercises = async (): Promise<Exercise[]> => {
+  await delay(1000); 
+
   try {
     const res = await fetch('https://api.api-store.workers.dev/api/fitlog', {
-      next: {
-        revalidate: 30
-      }
+      // next: {
+      //   revalidate: 30
+      // }
     });
 
     if (!res.ok) {
@@ -25,7 +30,7 @@ const Library = async () => {
   const exercises = await getExercises();
 
   return (
-    <section className="py-8 px-4 md:px-8 max-w-7xl mx-auto">
+    <section id="library" className="py-8 px-4 md:px-8 max-w-7xl mx-auto">
       <div className="mb-8">
         <Link href="/theLibrary" className="text-2xl font-oswald md:text-3xl font-black uppercase tracking-tight text-white">
           THE LIBRARY
@@ -37,7 +42,7 @@ const Library = async () => {
 
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {exercises?.slice(0, 6).map((exercise) => (
+        {exercises?.map((exercise) => (
           <ExerciseCard key={exercise.id} exercise={exercise} />
         ))}
       </div>

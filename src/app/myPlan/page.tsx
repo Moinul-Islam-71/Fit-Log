@@ -1,22 +1,30 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Link from 'next/link';
 import { Exercise } from '@/types/exercises.type';
 import { useExercise } from '@/context/ExerciseContext';
 import SelectedExerciseCard from '@/components/myPlanPage/SelectedExerciseCard';
 import { useSearchParams } from 'next/navigation';
+import MyPlanLoadingPage from './loading';
 
 export default function WorkoutDashboard() {
-  const { plan, savedPlan } = useExercise();
+  const { plan, savedPlan, isLoaded } = useExercise();
 
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
 
   const [activeTab, setActiveTab] = useState<'today' | 'saved'>(
-    tab === 'today' ? 'today' : 'saved'
+    tab === 'saved' ? 'saved' : 'today'
   );
 
   const [sortBy, setSortBy] = useState<string | null>(null);
+
+  
+  if (!isLoaded) {
+    return <MyPlanLoadingPage />;
+  }
+
 
   const sortSelectedExercises = (exercises: Exercise[]) => {
     if (!sortBy) {
@@ -32,6 +40,10 @@ export default function WorkoutDashboard() {
         return a.caloriesBurned - b.caloriesBurned;
       }
 
+      if (sortBy === 'Rating') {
+        return a.rating - b.rating;
+      }
+
       return 0;
     });
   };
@@ -42,7 +54,7 @@ export default function WorkoutDashboard() {
   const exercises =
     activeTab === 'today'
       ? sortedTodaysPlans
-      : sortedSavedLaterPlans;;
+      : sortedSavedLaterPlans;
 
   const totalExercises = exercises.length;
 
@@ -133,7 +145,6 @@ export default function WorkoutDashboard() {
 
 
           <div className="flex items-center space-x-2 self-end sm:self-auto">
-
             <span className="text-gray-400 text-sm font-medium">
               Sort By
             </span>
@@ -143,11 +154,11 @@ export default function WorkoutDashboard() {
               onChange={(e) => setSortBy(e.target.value || null)}
               className="bg-[#12141a] text-white text-sm font-medium px-4 py-2.5 rounded-xl outline-none hover:bg-[#1c2029] transition-colors cursor-pointer"
             >
-              <option value="">Category</option>
+              <option value="">Sort By</option>
               <option value="Duration">Duration</option>
               <option value="Calorie">Calorie</option>
+              <option value="Rating">Rating</option>
             </select>
-
           </div>
 
         </div>
@@ -165,9 +176,9 @@ export default function WorkoutDashboard() {
               Browse the library and add a lift to get today moving.
             </p>
 
-            <button className="bg-[#ccff00] text-black font-bold text-sm md:text-base px-6 py-3 rounded-full hover:bg-[#b3e600] active:scale-95 transition-all shadow-md">
+            <Link href="/" className="bg-[#ccff00] text-black font-bold text-sm md:text-base px-6 py-3 rounded-full hover:bg-[#b3e600] active:scale-95 transition-all shadow-md">
               Go to workouts
-            </button>
+            </Link>
 
           </div>
 
@@ -179,6 +190,7 @@ export default function WorkoutDashboard() {
               <SelectedExerciseCard
                 key={exercise.id}
                 exercise={exercise}
+                listType={activeTab}
               />
             ))}
 

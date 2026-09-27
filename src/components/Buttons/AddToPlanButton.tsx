@@ -3,14 +3,14 @@
 import { Calendar } from 'lucide-react';
 import { useExercise } from '@/context/ExerciseContext';
 import { Exercise } from '@/types/exercises.type';
+import { toast } from 'react-toastify';
 
 type AddToPlanButtonProps = {
     exercise: Exercise;
 };
 
 const AddToPlanButton = ({ exercise }: AddToPlanButtonProps) => {
-    const { plan, setPlan } = useExercise();
-    const { savedPlan } = useExercise();
+    const { plan, savedPlan, setPlan } = useExercise();
 
     const onAddToPlan = () => {
         const alreadyAddedInPlan = plan.some(
@@ -22,10 +22,18 @@ const AddToPlanButton = ({ exercise }: AddToPlanButtonProps) => {
         );
 
         if (alreadyAddedInPlan || alreadySavedForLater) {
+            toast.info('This exercise is already added!');
             return;
         }
 
+        if(plan.length >= 5) {
+            toast.error("Limit Exceeded");
+            return
+        }
+
         setPlan([...plan, exercise]);
+
+        toast.success(`${exercise.name} added to today's plan!`);
     };
 
     return (
