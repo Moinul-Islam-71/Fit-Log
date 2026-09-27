@@ -10,7 +10,7 @@ const getExercises = async (): Promise<Exercise[]> => {
     await delay(500); 
 
     const res = await fetch('https://api.api-store.workers.dev/api/fitlog', {
-      cache: 'no-store', 
+      // cache: 'no-store', 
     });
 
     if (!res.ok) {
